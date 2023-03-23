@@ -1,0 +1,7 @@
+{
+  "version": "0.2.0",
+  "type": "PublishPlugin",
+  "id": "com.fraymakers.ContentExporter",
+  "name": "Fraymakers Content Exporter",
+  "description": "Provides export logic for official Fraymakers content."
+}
