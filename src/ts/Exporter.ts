@@ -559,6 +559,22 @@ export default class Exporter {
                         // [symbol.x, symbol.y, symbol.alpha, symbol.pivotX, symbol.pivotY, symbol.rotation, symbol.scaleX, symbol.scaleY, sheetID, frameID]
                         let castedNextSymbol = nextSymbol as IImageSymbol;
                         let imageAsset = this.m_config.guidToAsset[symbol.imageAsset];
+                        if (!imageAsset) {
+                          FrayToolsPluginCore.log('warn', `--------> Missing image asset: ${symbol.imageAsset} in animation ${animation.name} keyframe: ${keyframe_index}. Will use placeholder...`);
+                          imageAsset = {
+                            bitmapData: MISSING_IMAGE,
+                            metadata: {
+                              version: 0,
+                              guid: '__placeholder__',
+                              id: '',
+                              export: true,
+                              tags: [],
+                              plugins: [],
+                              pluginMetadata: {}
+                            },
+                            filename: 'placeholder.png'
+                          };
+                        }
 
                         // Grab rotation and scale first
                         let rotationTweened = TweenUtil.interpolate(symbol.rotation, castedNextSymbol.rotation, i / (previousKeyframeLength), TweenType.toEaseValue(symbolKeyframe.tweenType));
